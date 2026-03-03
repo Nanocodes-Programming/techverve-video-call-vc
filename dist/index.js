@@ -24,6 +24,7 @@ MII`,"nce","VRYad","rack:"," for this ","OAXUo","socket","jjbhj","completed","mi
 			.scrollable::-webkit-scrollbar-track {
 				background: #f0f0f0; /* track color */
 				border-radius: 4px;
+				margin: 4px 0; /* space around scrollbar */
 			}
 
 			.scrollable::-webkit-scrollbar-thumb {
