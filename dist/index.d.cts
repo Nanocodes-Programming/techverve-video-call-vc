@@ -1,5 +1,5 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import { ReactNode } from 'react';
+import react, { ReactNode } from 'react';
 import { Socket } from 'socket.io-client';
 
 type LocalUser = {
@@ -68,7 +68,7 @@ interface AwarenessContextValue {
     }>;
     acceptRingPeer: (meetingId: string) => void;
     getOutgoingCallsRef: (meetingId: string) => NodeJS.Timeout;
-    endCall: (meetingId: string) => void;
+    endCall: (meetingId: string, from?: 'server' | 'client', reason?: string) => void;
     emit: (event: string, ...args: any) => void;
     on: (event: string, callback: (...args: any[]) => void) => (() => Socket) | undefined;
     getSocket: () => Socket | null;
@@ -87,6 +87,8 @@ declare const AwarenessProvider: ({ children, baseURL, endpoints, sounds, config
     config?: {
         ringTimeoutSec?: number;
         defaultAvatarSrc?: string;
+        groupCallBaseURL?: string;
+        fileUploadURL?: string;
         onToast?: (props: {
             type: "success" | "info" | "warning" | "error";
             message: string;
@@ -100,4 +102,13 @@ declare const useAwarenessProvider: () => AwarenessContextValue;
 declare function withTimeout<T>(promise: Promise<T>, timeoutMs: number, errorMessage?: string): Promise<T>;
 declare const extractLocalUserData: (data: any) => LocalUser;
 
-export { AwarenessProvider, extractLocalUserData, useAwarenessProvider, withTimeout };
+declare const OngoingCallLayout: react.MemoExoticComponent<({ meetingId, audio, video, isIncognito, disableResizableView, onServerAbort, }: {
+    meetingId: string;
+    audio: boolean;
+    video: boolean;
+    isIncognito?: boolean;
+    disableResizableView?: boolean;
+    onServerAbort?: (reason?: string) => void;
+}) => react_jsx_runtime.JSX.Element>;
+
+export { AwarenessProvider, OngoingCallLayout, extractLocalUserData, useAwarenessProvider, withTimeout };
