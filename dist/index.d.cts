@@ -68,7 +68,7 @@ interface AwarenessContextValue {
     }>;
     acceptRingPeer: (meetingId: string) => void;
     getOutgoingCallsRef: (meetingId: string) => NodeJS.Timeout;
-    endCall: (meetingId: string, from?: 'server' | 'client', isPopupMode?: boolean) => void;
+    endCall: (meetingId: string, from?: 'server' | 'client', isPopupMode?: boolean) => Promise<void>;
     emit: (event: string, ...args: any) => void;
     on: (event: string, callback: (...args: any[]) => void) => (() => Socket) | undefined;
     getSocket: () => Socket | null;
