@@ -67,7 +67,6 @@ interface AwarenessContextValue {
         aborted: boolean;
     }>;
     acceptRingPeer: (meetingId: string) => void;
-    getOutgoingCallsRef: (meetingId: string) => NodeJS.Timeout;
     endCall: (meetingId: string, from?: 'server' | 'client', isPopupMode?: boolean) => Promise<void>;
     emit: (event: string, ...args: any) => void;
     on: (event: string, callback: (...args: any[]) => void) => (() => Socket) | undefined;
@@ -113,4 +112,6 @@ declare const OngoingCallLayout: react.MemoExoticComponent<({ meetingId, audio, 
 
 declare const AdminUI: react.FC;
 
-export { AdminUI, AwarenessProvider, OngoingCallLayout, extractLocalUserData, useAwarenessProvider, withTimeout };
+declare const OnlineIndicator: () => react_jsx_runtime.JSX.Element;
+
+export { AdminUI, AwarenessProvider, OngoingCallLayout, OnlineIndicator, extractLocalUserData, useAwarenessProvider, withTimeout };
